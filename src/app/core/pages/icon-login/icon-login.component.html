@@ -1,0 +1,9 @@
+<ion-fab vertical="top" horizontal="end" slot="fixed" title="{{name}}" (click)="test()">
+    <ion-fab-button>
+      <!-- <ion-icon name="person"></ion-icon> -->
+      <img src="{{photo}}"/>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+        <ion-fab-button (click)="signOut()"><ion-icon name="log-out"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+  </ion-fab>

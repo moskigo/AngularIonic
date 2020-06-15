@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reservation <i class="fa fa-plus add-reservation" (click)="isAddReservation = true"></i></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="!isAddReservation">
+    <table class="table table-hover">
+      <thead>
+        <th>Class Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total Student</th>
+        <th>Edit</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of joinReservation">
+            <td>{{reservation.class.name}}</td>
+            <td>{{reservation.reservation.startDate}}</td>
+            <td>{{reservation.reservation.endDate}}</td>
+            <td>{{reservation.students.length}}</td>
+            <td><i class="fa fa-edit"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+
+ 
+    
+
+<div *ngIf="isAddReservation" class="container">
+    
+  <div class="input-custom-container was-validated">
+    <label>Class</label>
+    <select required class="custom-select" [(ngModel)]="reservation.classId">
+      <option *ngFor="let class of classes" value="{{class.objectId}}" >{{class.name}}</option>
+    </select>
+  </div>
+  <div class="input-custom-container">
+    <label>Start Date</label>
+    <input required class="form-control" type="date" placeholder="Start date" [(ngModel)]="reservation.startDate">
+  </div>
+  <div class="input-custom-container">
+      <label>End Date</label>
+    <input required class="form-control" type="date" placeholder="End date" [(ngModel)]="reservation.endDate">
+  </div>
+  <div class="input-custom-container">
+  <label>Select Students</label>
+  <select class="custom-select select-input" multiple [(ngModel)]="reservation.students" >
+    <option *ngFor="let student of students" value="{{student.objectId}}">{{student.firstName}} {{student.lastName}}</option>
+  </select>
+</div>
+  <div>
+    <button class="btn-info" type="submit" (click)="Save()">Save</button>
+  </div>
+ 
+</div>
+</ion-content>

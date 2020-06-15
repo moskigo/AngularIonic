@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Classes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <div *ngIf="!addClass">
+    <div class="add-class" (click)="addClass = true">
+      <i class="fa fa-plus"> add class</i>
+    </div>
+    <table class="table table-hover">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Total Capacity</th>
+      <th>Is Active</th>
+      <th>Edit</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let class of classes">
+        <td>{{class.name}}</td>
+        <td>{{class.description}}</td>
+        <td>{{class.totalCapacity}}</td>
+        <td><i class="{{class.isActive ? 'fa fa-check': ''}}"></i></td>
+        <td><i class="fa fa-times" (click)="DeleteClass(class.objectId)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  
+
+
+
+  <!--add new class-->
+
+  <div *ngIf="addClass">
+    <input class="col-12 form-control" type="text" placeholder="Name" [(ngModel)]="newClass.name">
+    <input class="col-12 form-control" type="text" placeholder="Description" [(ngModel)]="newClass.description">
+    <input class="col-12 form-control" type="number" placeholder="Total capacity" [(ngModel)]="newClass.totalCapacity">
+    <div class="form-group">
+      <div class="form-check">
+
+        <label class="form-check-label" for="active">Is Active<input id="active" class="col-6 form-check-input"
+            type="checkbox" [(ngModel)]="newClass.isActive"></label>
+      </div>
+    </div>
+    <button class="btn-primary" (click)="addNewClass()">Save</button>
+    <button class="btn-danger">Cancel</button>
+  </div>

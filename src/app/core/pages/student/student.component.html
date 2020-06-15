@@ -1,0 +1,184 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Students all</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <div *ngIf="!newStudent && !showStudentDetail">
+    <table class="table">
+      <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Detail</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{student.firstName}}</td>
+          <td>{{student.lastName}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.phone}}</td>
+          <td>
+            <i class="fa fa-user" (click)="DetailStudent(student.objectId)"></i>
+            <i class="fa fa-times icon-remove" (click)="RemoveStudent(student.objectId)"></i>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div *ngIf="showStudentDetail">
+      <button type="button" class="btn-danger" (click)="Back()">Back</button>
+    </div>
+    <!-- <div class="btn-new">
+      <button class="btn-primary" type="button" (click)="newStudent = true">New</button>
+      </div> -->
+
+
+    <h2>{{lat}}</h2>
+    <h2>{{lon}}</h2>
+
+    <ion-button color="secondary" (click)="takePhoto()">
+      Take Photo
+    </ion-button>
+
+    <ion-button color="warning" (click)="getGeo()">
+      Get Geo
+    </ion-button>
+
+    <ion-button color="primary" (click)="newStudent = true">
+      Add student
+    </ion-button>
+  </div>
+
+  <!--add new student-->
+
+  <div *ngIf="newStudent" class="container">
+    <!-- <div class="row form-group justify-content-center">
+        <div class="form-container">
+        <h3>Student</h3>
+        <input class="col-12 form-control" type="text" placeholder="First name" [(ngModel)]="createStudent.firstName">
+        <input class="col-12 form-control" type="text" placeholder="Last name" [(ngModel)]="createStudent.lastName">
+        <input class="col-12 form-control" type="text" placeholder="Phone" [(ngModel)]="createStudent.phone">
+        <input class="col-12 form-control" type="text" placeholder="Email" [(ngModel)]="createStudent.email">
+        <input class="col-12 form-control" type="date" placeholder="Date of birthday" [(ngModel)]="createStudent.date">
+        <select class="col-12 form-control" [(ngModel)]="createStudent.status">
+          <option>{{status[0]}}</option>
+          <option>{{status[1]}}</option>
+          <option>{{status[2]}}</option>
+        </select>
+        <button class="btn-primary btn-save" type="button" (click)="CreateStudent()">Save</button>
+        </div>
+      </div> -->
+
+    <ion-card>
+      <ion-card-header>
+
+        <ion-card-title>General info</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+
+
+          <div ngForm #classesForm="ngForm">
+          
+
+              
+              
+            
+           
+
+        
+
+
+      
+        <!-- <ion-chip class="chip-ava" (click)="takePhoto()"> -->
+        <ion-avatar (click)="takePhoto()">
+          <img *ngIf="myPhoto" class="student-ava" src="{{myPhoto}}">
+          <ion-icon *ngIf="!myPhoto" name="person"></ion-icon>
+        </ion-avatar>
+    
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">First name</ion-label>
+            <ion-input required name="firstname" type="text" [(ngModel)]="createStudent.firstName" [ngClass]="{'ng-submit' : classesForm._submitted}"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Last name</ion-label>
+            <ion-input required name="lastname"  type="text" [(ngModel)]="createStudent.lastName" [ngClass]="{'ng-submit' : classesForm._submitted}"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input required name="email" type="email" [(ngModel)]="createStudent.email" [ngClass]="{'ng-submit' : classesForm._submitted}"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Phone</ion-label>
+            <ion-input type="number" name="phone" [(ngModel)]="createStudent.phone"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Date of birt</ion-label>
+            <ion-input required name="dob" type="date" [(ngModel)]="createStudent.date" [ngClass]="{'ng-submit' : classesForm._submitted}"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Status</ion-label>
+            <ion-select required name="status" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="select..." [ngClass]="{'ng-submit' : classesForm._submitted}">
+              <ion-select-option value={{status[0]}}>{{status[0]}}</ion-select-option>
+              <ion-select-option value={{status[1]}}>{{status[1]}}</ion-select-option>
+              <ion-select-option value={{status[2]}}>{{status[2]}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-button color="warning" (click)="CreateStudent(classesForm)">
+            Save
+          </ion-button>
+          <ion-button color="warning" (click)="newStudent = false">
+            Back
+          </ion-button>
+       
+
+        </ion-list>
+      </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+  <div *ngIf="showStudentDetail" class="container">
+    <div class="row item-detail">
+      <h3 class="col-12">Student</h3>
+      <input class="col-6 form-control" type="text" placeholder="First name" [(ngModel)]="studentDetail.firstName">
+      <input class="col-6 form-control" type="text" placeholder="Last name" [(ngModel)]="studentDetail.lastName">
+      <input class="col-6 form-control" type="text" placeholder="Phone" [(ngModel)]="studentDetail.phone">
+      <input class="col-6 form-control" type="text" placeholder="Email" [(ngModel)]="studentDetail.email">
+      <input class="col-6 form-control" type="date" placeholder="Date of birthday" [(ngModel)]="studentDetail.date">
+      <select class="col-6 form-control" [(ngModel)]="studentDetail.status">
+        <option>{{status[0]}}</option>
+        <option>{{status[1]}}</option>
+        <option>{{status[2]}}</option>
+      </select>
+      <div class="col-12 btn-custom-container">
+
+        <button class="col-1 btn-primary">Save</button>
+
+
+        <button type="button" class="col-1 btn-danger" (click)="Back()">Back</button>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input required [(ngModel)]="email"></ion-input>
+    </ion-item>
+      <ion-item>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" required [(ngModel)]="pass"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="Login()">Login</ion-button>
+      <ion-card-content>
+      <ion-button color="light" expand="block" (click)="LoginGoogle()"><ion-icon name="logo-googleplus"></ion-icon>google</ion-button>
+      <ion-button color="light" expand="block"><ion-icon name="logo-facebook"></ion-icon>facebook</ion-button>
+</ion-card-content>
+
+
+  
+</ion-content>

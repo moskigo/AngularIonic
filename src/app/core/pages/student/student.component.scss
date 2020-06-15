@@ -1,0 +1,85 @@
+.btn-new {
+  position: absolute;
+  top: -4px;
+  right: 1px;
+}
+
+.form-container {
+  margin-left: 20px;
+  margin-right: 20px;
+  max-width: 460px;
+}
+
+.btn-save {
+  float: inline-end;
+  height: 22px;
+  margin-top: 2px;
+}
+
+.table {
+  // overflow-x: auto;
+  overflow-y: scroll !important;
+}
+
+// ion-list
+// {
+//     overflow-y: scroll !important;
+// };
+.icon-remove {
+  margin-left: 18px;
+  cursor: pointer;
+}
+
+.item-detail {
+  margin: 5px;
+}
+
+.btn-custom-container {
+  text-align: end;
+  padding: 0;
+  padding-top: 5px;
+}
+
+ion-item > ion-label {
+  color: grey;
+}
+
+// .chip-ava {
+//   width: 200px;
+//   height: 200px;
+// }
+ion-avatar {
+  width: 200px;
+  height: 200px;
+  ion-icon {
+    width: 90%;
+    height: 100%;
+    color: #adadad;
+  }
+}
+.student-ava {
+  width: 200px;
+}
+
+// :host /deep/.ng-submit-custom,
+// :host /deep/input.ng-touched.ng-invalid,
+// :host /deep/textarea.ng-touched.ng-invalid,
+// :host /deep/select.ng-touched.ng-invalid {
+//   box-shadow: 0px 0px 17px -2px red;
+// }
+
+// :host /deep/.search.ng-submit,
+// :host /deep/input.ng-submit.ng-invalid,
+// :host /deep/textarea.ng-submit.ng-invalid,
+// :host /deep/select.ng-submit.ng-invalid {
+//   box-shadow: 0px 0px 17px -2px red;
+// }
+
+.ng-submit.ng-invalid::after {
+  content: "Required field";
+  color: #f04141;
+  font-size: 12px;
+  position: absolute;
+  top: 23px;
+  right: 2px;
+}
